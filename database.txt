@@ -4,4 +4,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-                
+
+We use this code for the database connection
+Input this code/query in the sql terminal 
