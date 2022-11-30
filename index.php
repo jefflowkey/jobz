@@ -18,6 +18,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <style>
         body{ font: 14px sans-serif; text-align: center; }
     </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>Home | Welcome</title>
 </head>
 
 <body>
