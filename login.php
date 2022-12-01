@@ -98,6 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         body{ font: 14px sans-serif; }
         .wrapper{ width: 360px; padding: 20px; }
     </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
