@@ -124,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
 
                 <div class="name">
-                    <input type="text" name="fname" class="form-control <?php echo (!empty($fname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fname; ?>" pattern="[a-z]*">
+                    <input type="text" name="fname" class="form-control <?php echo (!empty($fname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fname; ?>" pattern="[A-Za-z]*">
                     <span class="invalid-feedback">
                         <?php echo $fname_err; ?>
                     </span>
