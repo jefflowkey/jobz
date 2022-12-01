@@ -1,0 +1,66 @@
+input:invalid {
+    animation: shake 0.5s;
+}
+
+
+@keyframes shake {
+    25% {transform: translateX(8px) ;}
+    50% {transform: translateX(-10px) ;}
+    75% {transform: translateX(8px) ;}
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-shadow: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url("background.jpg");
+    background-position-x: center;
+    background-size: cover; 
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper {
+    color: white;
+    background: black;
+    display: flex;
+    width: 500px;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;   
+}
+
+p {
+    text-align: center;
+}
+
+.name {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    padding:2px;
+}
+
+.form-group input {
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    margin: auto;
+}
+
+.name input {
+    display: flex;
+    width: 45%;
+    align-items: left;
+}
