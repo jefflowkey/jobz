@@ -146,6 +146,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>    
 
             <div class="form-group">
+                <label>Email Address</label>
+                <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <span class="invalid-feedback">
+                    <?php echo $email_err; ?>
+                </span>
+            </div>
+            
+            <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
                 <span class="invalid-feedback">
