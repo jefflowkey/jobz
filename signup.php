@@ -130,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </span>
 
                 
-                    <input type="text" name="lname" class="form-control <?php echo (!empty($lname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $lname; ?>" pattern="[a-z]*">
+                    <input type="text" name="lname" class="form-control <?php echo (!empty($lname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $lname; ?>" pattern="[A-Za-z]*">
                     <span class="invalid-feedback">
                         <?php echo $lname_err; ?>
                     </span>
@@ -152,7 +152,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <?php echo $email_err; ?>
                 </span>
             </div>
-            
+
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
