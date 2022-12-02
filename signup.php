@@ -3,11 +3,71 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+    $fname = $lname = $username = $email = $password = $confirm_password = "";
+    $fname_err = $lname_err = $username_err = $email_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Validate first name
+    if(empty(trim($_POST["fname"]))){
+        $fname_err = "Please enter your first name.";
+    } elseif(!preg_match('/^[a-zA-z]*$/', trim($_POST["fname"]))){
+        $fname_err = "Name can only contain letters.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE fname = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_fname);
+            
+            // Set parameters
+            $param_fname = trim($_POST["fname"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                $fname = trim($_POST["fname"]);
+            } else{
+                echo "Oops! Something went first name. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Validate last name
+    if(empty(trim($_POST["lname"]))){
+        $lname_err = "Please enter your last name.";
+    } elseif(!preg_match('/^[a-zA-z]*$/', trim($_POST["lname"]))){
+        $lname_err = "Name can only contain letters.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE lname = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_lname);
+            
+            // Set parameters
+            $param_lname = trim($_POST["lname"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                $lname = trim($_POST["lname"]);
+            } else{
+                echo "Oops! Something went second name. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
 
     // Validate username
     if(empty(trim($_POST["username"]))){
@@ -36,7 +96,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $username = trim($_POST["username"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Oops! Something went username. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Validate email
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter your email.";
+    } elseif(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", trim($_POST["email"]))){
+        $email_err = "Please use the correct email format.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE email = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            
+            // Set parameters
+            $param_email = trim($_POST["email"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "This email is already taken.";
+                } else{
+                    $email = trim($_POST["email"]);
+                }
+            } else{
+                echo "Oops! Something went email. Please try again later.";
             }
 
             // Close statement
@@ -64,17 +159,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($fname_err) && empty($lname_err) && empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (fname, lname, username, email, password) VALUES (?, ?, ?, ?, ?)";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_fname, $param_lname, $param_username, $param_email, $param_password);
             
             // Set parameters
+            $param_fname = $fname;
+            $param_lname = $lname;
             $param_username = $username;
+            $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
@@ -82,7 +180,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Redirect to login page
                 header("location: login.php");
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Oops! Something went final. Please try again later.";
             }
 
             // Close statement
