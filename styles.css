@@ -25,6 +25,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 .wrapper {
     color: white;
     background: black;
@@ -43,6 +44,7 @@ h2 {
 
 p {
     text-align: center;
+    padding: 4px;
 }
 
 .name {
@@ -63,4 +65,45 @@ p {
     display: flex;
     width: 45%;
     align-items: left;
+}
+
+/* for the login page */
+
+.text {
+    align-items: center;
+    display: flex;
+
+}
+
+.intext {
+    border-style: solid 1px aqua;
+    border-radius: 10px;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    padding: 10px;
+}
+
+/* for the mobile */
+
+@media only screen and (max-width: 600px) {
+    .text {
+        align-items: center;
+        display: inline;
+        margin: auto;
+    }
+
+    .intext {
+        border-style: solid 1px aqua;
+        border-radius: 10px;
+        border-right: 1px solid;
+        border-left: 1px solid;
+        border-bottom: 0;
+        border-top: 0;
+        padding: 10px;
+    }
+
+    .wrapper {
+        width: 350px;
+        border-radius: 10px;
+    }
 }
