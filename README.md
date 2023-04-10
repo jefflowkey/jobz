@@ -6,4 +6,4 @@ The password is encrypted and stored in the database as well as the username.
 
 You can test this using the below link:
 
-    www.kilonzo.epizy.com
+    www.kilonzo.epizy.com/signup.php
